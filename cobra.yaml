@@ -28,14 +28,14 @@ enterprise:
   variables:
     db-name:
       type: string
-      default: mongo
+      value: mongo
       env: DB_NAME
     db-user:
       type: string
-      default: mongo
+      value: mongo
     db-pass:
       type: string
-      default: password
+      value: password
 
 system:
   defines: group
