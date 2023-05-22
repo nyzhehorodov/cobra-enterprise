@@ -1,0 +1,34 @@
+namespace: cobra 
+
+db:
+    defines: runnable
+    inherits: mongo/latest 
+
+enterprise:
+    defines: runnable
+    metadata:
+        name: Cobra Enterprise
+        description: "Cobra Enterprise, now with highscores :)"
+    containers:
+        app:
+            build: .
+            environment:
+                - <- `DB_HOST=${db-host}`
+                - <- `DB_PORT=${db-port}`
+                - <- `DB_NAME=${db-name}`
+    variables:
+        db-host: 
+            type: string
+            default: localhost
+        db-port:
+            type: int
+            default: 27017
+        db-name:
+            type: string
+            default: cobra
+
+system:
+    defines: process-group
+    runnables:
+        - cobra/db
+        - cobra/enterprise
