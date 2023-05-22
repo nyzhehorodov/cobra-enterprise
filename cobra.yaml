@@ -11,7 +11,7 @@ enterprise:
     description: "Cobra Enterprise, now with highscores :)"
   containers:
     app:
-      build: .
+      image: "docker.io/nooga/cobra-enterprise:latest"
       environment:
         - <- `DB_HOST=` connection-hostname("mongo") concat
         - <- `DB_PORT=` connection-port("mongo") concat
@@ -33,12 +33,14 @@ enterprise:
     db-user:
       type: string
       value: mongo
+      env: DB_USER
     db-pass:
       type: string
       value: password
+      anv: DB_PASS
 
 system:
-  defines: group
-  members:
+  defines: process-group
+  runnable-list:
     - cobra/db
     - cobra/enterprise
