@@ -9,6 +9,8 @@ enterprise:
   metadata:
     name: Cobra Enterprise
     description: "Cobra Enterprise, now with highscores :)"
+    icon: "https://cdn.icon-icons.com/icons2/1465/PNG/512/492snake_100855.png"
+    publisher: nooga
   containers:
     app:
       image: "docker.io/nooga/cobra-enterprise:latest"
@@ -41,6 +43,11 @@ enterprise:
 
 system:
   defines: process-group
+  metadata:
+    name: Cobra Enterprise
+    description: "Cobra Enterprise, now with highscores :)"
+    icon: "https://cdn.icon-icons.com/icons2/1465/PNG/512/492snake_100855.png"
+    publisher: nooga
   runnable-list:
     - cobra/db
     - cobra/enterprise

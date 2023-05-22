@@ -46,7 +46,7 @@ const start = async () => {
     try {
         const dbCred = DB_USER ? `${DB_USER}:${DB_PASS}@` : '';
         const connectionString = `mongodb://${dbCred}${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-        await mongoose.connect(connectionString);
+        await mongoose.connect(connectionString, {user: DB_USER, pass: DB_PASS, useNewUrlParser: true, useUnifiedTopology: true});
         console.log('MongoDB connected...');
         await fastify.listen({
             port: 3001,
