@@ -13,8 +13,8 @@ enterprise:
     app:
       image: "docker.io/nooga/cobra-enterprise:latest"
       environment:
-        - <- `DB_HOST=` connection-hostname("mongo") concat
-        - <- `DB_PORT=` connection-port("mongo") concat
+        - <- `DB_HOST=` connection-hostname("mongodb") concat
+        - <- `DB_PORT=` connection-port("mongodb") concat
   services:
     app:
       container: app
@@ -22,7 +22,7 @@ enterprise:
       port: 3001
       host-port: 3001
   connections:
-    mongo:
+    mongodb:
       runnable: cobra/db
       service: mongodb
   variables:
@@ -37,7 +37,7 @@ enterprise:
     db-pass:
       type: string
       value: password
-      anv: DB_PASS
+      env: DB_PASS
 
 system:
   defines: process-group
