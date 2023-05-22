@@ -15,7 +15,12 @@ enterprise:
       environment:
         - <- `DB_HOST=` connection-hostname("mongo") concat
         - <- `DB_PORT=` connection-port("mongo") concat
-        - <- `DB_NAME=${db-name}`
+  services:
+    app:
+      container: app
+      protocol: tcp
+      port: 3001
+      host-port: 3001
   connections:
     mongo:
       runnable: cobra/db
@@ -24,6 +29,7 @@ enterprise:
     db-name:
       type: string
       default: mongo
+      env: DB_NAME
     db-user:
       type: string
       default: mongo
@@ -32,7 +38,7 @@ enterprise:
       default: password
 
 system:
-  defines: process-group
-  runnables:
+  defines: group
+  members:
     - cobra/db
     - cobra/enterprise
