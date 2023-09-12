@@ -1,0 +1,50 @@
+namespace: cobra-enterprise
+cobra-enterprise:
+  defines: runnable
+  metadata:
+    name: cobra-enterprise
+    description: >-
+      A fastify based server to serve a 'Snake' game and manage highscores using
+      mongoose for persistence.
+    icon: https://emojiapi.dev/api/v1/snake.svg
+  containers:
+    cobra-enterprise:
+      build: .
+  services:
+    app-port:
+      container: cobra-enterprise
+      port: 3001
+      host-port: 3001
+      publish: false
+      protocol: TCP
+      description: Port for listening to incoming HTTP requests to the server
+  connections:
+    mongo-db:
+      target: mongodb/mongodb
+      service: mongodb
+  variables:
+    db-host:
+      env: DB_HOST
+      type: string
+      description: Hostname for the MongoDB database
+      value: <- connection-hostname("mongo-db")
+    db-port:
+      env: DB_PORT
+      type: int
+      description: Port number for the MongoDB database
+      value: <- connection-port("mongo-db")
+    db-name:
+      env: DB_NAME
+      type: string
+      description: Database name to connect
+      value: '!!!SETME!!!'
+    db-user:
+      env: DB_USER
+      type: string
+      description: Username used for database authentication
+      value: '!!!SETME!!!'
+    db-pass:
+      env: DB_PASS
+      type: string
+      description: Password used for database authentication
+      value: '!!!SETME!!!'
